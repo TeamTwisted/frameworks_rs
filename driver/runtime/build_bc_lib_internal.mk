@@ -95,7 +95,7 @@ $(LOCAL_BUILT_MODULE): $(AOSP_LLVM_LINK) $(clcore_LLVM_LD)
 $(LOCAL_BUILT_MODULE): $(AOSP_LLVM_AS) $(BCC_STRIP_ATTR)
 	@echo "bc lib: $(PRIVATE_MODULE) ($@)"
 	@mkdir -p $(dir $@)
-	$(hide) $(AOSP_LLVM_LINK) $(PRIVATE_BC_FILES) -o $@.unstripped
+	$(hide) $(AOSP_LLVM_LINK) $(PRIVATE_BC_FILES) -o $@.unstripped 2> >(grep -o -v "modules of different")
 	$(hide) $(BCC_STRIP_ATTR) -o $@ $@.unstripped
 
 BCC_RS_TRIPLE :=
